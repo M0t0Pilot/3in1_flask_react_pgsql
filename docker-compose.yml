@@ -1,0 +1,30 @@
+
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - PAYPAL_CLIENT_ID=your_paypal_client_id
+      - PAYPAL_CLIENT_SECRET=your_paypal_client_secret
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: your_database
+      POSTGRES_USER: your_user
+      POSTGRES_PASSWORD: your_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
